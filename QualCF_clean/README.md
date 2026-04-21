@@ -1,6 +1,6 @@
 # QualCF
 
-Quality-Aware Collaborative Filtering via Rectified Flow Matching.
+Steering the Flow: Quality-Aware Personalized Prior Construction for Generative Collaborative Filtering.
 
 ## Requirements
 
@@ -26,11 +26,6 @@ Datasets can be downloaded automatically by RecBole, or manually placed under `d
 # Amazon-Beauty
 python run.py --config configs/qualcf_beauty.yaml
 
-# MovieLens-1M
-python run.py --config configs/qualcf.yaml
-
-# MovieLens-20M
-python run.py --config configs/qualcf_ml20m.yaml
 ```
 
 ### Run Baselines
@@ -42,14 +37,6 @@ python baseline/run_baseline.py --config baseline/multivae/multivae_beauty.yaml
 
 Supported baselines: BPR, EASE, LightGCN, SGL, NCL, DGCL, MultiVAE, DiffRec, L-DiffRec, CDiff4Rec, GiffCF.
 
-### Ablation Studies
-
-```bash
-# Example: QualCF w/o quality network on Amazon-Beauty
-python run.py --config configs/ablation/qualcf_beauty_ablation_wo_quality_net.yaml
-```
-
-See `configs/ablation/` for all ablation configurations.
 
 ## Project Structure
 
@@ -64,10 +51,7 @@ QualCF/
 │   ├── giffcf/            # GiffCF
 │   └── ...                # BPR, EASE, LightGCN, SGL, NCL, MultiVAE, DiffRec, L-DiffRec
 ├── configs/
-│   ├── qualcf_beauty.yaml # QualCF on Amazon-Beauty
-│   ├── qualcf.yaml        # QualCF on MovieLens-1M
-│   ├── qualcf_ml20m.yaml  # QualCF on MovieLens-20M
-│   └── ablation/          # Ablation study configs
+│   ├── qualcf_beauty.yaml # QualCF on Amazon-Beauty 
 ├── run.py                 # Main entry point
 ├── utils.py               # Data utilities
 └── download_datasets.py   # Dataset download helper

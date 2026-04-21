@@ -1,0 +1,47 @@
+model: LDiffRec
+dataset: Amazon-Beauty
+data_path: ../dataset
+gpu_id: '0'
+log_wandb: False
+
+# LDiffRec params
+emb_size: 64
+n_layers: 2
+steps: 5
+noise_scale: 0.1
+noise_min: 0.0001
+noise_max: 0.02
+beta_fixed: True
+history_num_per_term: 10
+mean_type: x0
+w_min: 0.1
+w_max: 1.0
+d_steps: 100
+representation_size: 64
+
+# dataset settings
+USER_ID_FIELD: user_id
+ITEM_ID_FIELD: item_id
+RATING_FIELD: rating
+load_col:
+    inter: [user_id, item_id, rating, timestamp]
+
+user_inter_num_interval: "[5,inf)"
+item_inter_num_interval: "[5,inf)"
+val_interval: {rating: "[4, inf)"}
+
+# training settings
+epochs: 500
+train_batch_size: 400
+learner: adam
+learning_rate: 0.001
+eval_step: 1
+stopping_step: 10
+train_neg_sample_args: ~
+
+# evaluation settings
+metrics: ['Recall', 'NDCG']
+valid_metric: NDCG@10
+eval_batch_size: 40960000
+weight_decay: 0.0
+topk: [10, 20]

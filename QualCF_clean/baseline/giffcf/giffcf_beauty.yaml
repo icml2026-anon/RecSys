@@ -1,0 +1,43 @@
+model: GiffCF
+dataset: Amazon-Beauty
+data_path: ../dataset
+gpu_id: '0'
+log_wandb: False
+
+# GiffCF params
+embed_dim: 100
+dropout: 0.5
+norm_ord: 1
+T: 1
+alpha: 0.8
+ideal_weight: 0.2
+ideal_cutoff: 200
+noise_decay: 1.0
+noise_scale: 0.0
+
+# dataset settings
+USER_ID_FIELD: user_id
+ITEM_ID_FIELD: item_id
+RATING_FIELD: rating
+load_col:
+    inter: [user_id, item_id, rating, timestamp]
+
+user_inter_num_interval: "[5,inf)"
+item_inter_num_interval: "[5,inf)"
+val_interval: {rating: "[4, inf)"}
+
+# training settings
+epochs: 500
+train_batch_size: 100
+learner: adam
+learning_rate: 0.0003
+eval_step: 1
+stopping_step: 10
+train_neg_sample_args: ~
+
+# evaluation settings
+metrics: ['Recall', 'NDCG']
+valid_metric: NDCG@10
+eval_batch_size: 40960000
+weight_decay: 0.0
+topk: [10, 20]
